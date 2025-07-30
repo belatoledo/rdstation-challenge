@@ -1,4 +1,5 @@
 import React from "react";
+import RecommendationCard from "./Card/ReccomendationCard";
 
 function RecommendationList({ recommendations }) {
   return (
@@ -7,11 +8,13 @@ function RecommendationList({ recommendations }) {
 
       {recommendations.length === 0 && <p>Nenhuma recomendação encontrada.</p>}
 
-      <ul>
-        {recommendations.map((recommendation, index) => (
-          <li key={index} className="mb-2">
-            {recommendation.name}
-          </li>
+      <ul className="space-y-4 mt-6">
+        {recommendations.map((recommendation) => (
+          <RecommendationCard
+            key={recommendation.id}
+            name={recommendation.name}
+            category={recommendation.category}
+          />
         ))}
       </ul>
     </div>
