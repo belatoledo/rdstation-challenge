@@ -13,6 +13,23 @@ function calculateScores(products, preferencesSet, featuresSet) {
   });
 }
 
+function findTopProduct(productsWithScore) {
+  let topScoreProduct = null;
+  for (const product of productsWithScore) {
+    if (product.score > 0) {
+      if (
+        !topScoreProduct ||
+        product.score > topScoreProduct.score ||
+        (product.score === topScoreProduct.score &&
+          product.id > topScoreProduct.id)
+      ) {
+        topScoreProduct = product;
+      }
+    }
+  }
+  return topScoreProduct;
+}
+
 const getRecommendations = (formData = {}, products = []) => {
   const {
     selectedPreferences = [],
@@ -53,7 +70,9 @@ const getRecommendations = (formData = {}, products = []) => {
   });
 
   if (selectedRecommendationType === "SingleProduct") {
-    return sortedProducts.length > 0 ? [sortedProducts[0]] : [];
+    const topProduct = findTopProduct(productsWithScore);
+    if (!topProduct) return [];
+    return [topProduct];
   }
 
   return sortedProducts;
