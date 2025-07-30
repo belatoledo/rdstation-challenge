@@ -1,5 +1,50 @@
 // getRecommendations.js
 
+function calculateScores(products, preferencesSet, featuresSet) {
+  return products.map((product) => {
+    let score = 0;
+    if (product.preferences) {
+      score += product.preferences.filter((p) => preferencesSet.has(p)).length;
+    }
+    if (product.features) {
+      score += product.features.filter((f) => featuresSet.has(f)).length;
+    }
+    return { ...product, score };
+  });
+}
+
+function findTopProduct(productsWithScore) {
+  let topScoreProduct = null;
+  for (const product of productsWithScore) {
+    if (product.score > 0) {
+      if (
+        !topScoreProduct ||
+        product.score > topScoreProduct.score ||
+        (product.score === topScoreProduct.score &&
+          product.id > topScoreProduct.id)
+      ) {
+        topScoreProduct = product;
+      }
+    }
+  }
+  return topScoreProduct;
+}
+
+function filterAndSortProducts(productsWithScore) {
+  const filteredProducts = productsWithScore.filter((p) => p.score > 0);
+  if (filteredProducts.length === 0) {
+    return [];
+  }
+
+  const sortedProducts = filteredProducts.sort((a, b) => {
+    if (b.score !== a.score) {
+      return b.score - a.score;
+    }
+    return b.id - a.id;
+  });
+  return sortedProducts;
+}
+
 const getRecommendations = (formData = {}, products = []) => {
   const {
     selectedPreferences = [],
@@ -15,41 +60,22 @@ const getRecommendations = (formData = {}, products = []) => {
     return [];
   }
 
-  const productsWithScore = products.map((product) => {
-    let score = 0;
-    if (product.preferences) {
-      score += product.preferences.filter((prod) =>
-        selectedPreferences.includes(prod)
-      ).length;
-    }
-    if (product.features) {
-      score += product.features.filter((feat) =>
-        selectedFeatures.includes(feat)
-      ).length;
-    }
-    return { ...product, score };
-  });
+  const preferencesSet = new Set(selectedPreferences);
+  const featuresSet = new Set(selectedFeatures);
 
-  const filteredProducts = productsWithScore.filter(
-    (product) => product.score > 0
+  const productsWithScore = calculateScores(
+    products,
+    preferencesSet,
+    featuresSet
   );
 
-  if (filteredProducts.length === 0) {
-    return [];
-  }
-
-  const sortedProducts = filteredProducts.sort((a, b) => {
-    if (b.score !== a.score) {
-      return b.score - a.score;
-    }
-    return b.id - a.id;
-  });
-
   if (selectedRecommendationType === "SingleProduct") {
-    return sortedProducts.length > 0 ? [sortedProducts[0]] : [];
+    const topProduct = findTopProduct(productsWithScore);
+    if (!topProduct) return [];
+    return [topProduct];
   }
 
-  return sortedProducts;
+  return filterAndSortProducts(productsWithScore);
 };
 
 export default getRecommendations;
