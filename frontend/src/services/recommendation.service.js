@@ -1,5 +1,18 @@
 // getRecommendations.js
 
+function calculateScores(products, preferencesSet, featuresSet) {
+  return products.map((product) => {
+    let score = 0;
+    if (product.preferences) {
+      score += product.preferences.filter((p) => preferencesSet.has(p)).length;
+    }
+    if (product.features) {
+      score += product.features.filter((f) => featuresSet.has(f)).length;
+    }
+    return { ...product, score };
+  });
+}
+
 const getRecommendations = (formData = {}, products = []) => {
   const {
     selectedPreferences = [],
@@ -15,20 +28,14 @@ const getRecommendations = (formData = {}, products = []) => {
     return [];
   }
 
-  const productsWithScore = products.map((product) => {
-    let score = 0;
-    if (product.preferences) {
-      score += product.preferences.filter((prod) =>
-        selectedPreferences.includes(prod)
-      ).length;
-    }
-    if (product.features) {
-      score += product.features.filter((feat) =>
-        selectedFeatures.includes(feat)
-      ).length;
-    }
-    return { ...product, score };
-  });
+  const preferencesSet = new Set(selectedPreferences);
+  const featuresSet = new Set(selectedFeatures);
+
+  const productsWithScore = calculateScores(
+    products,
+    preferencesSet,
+    featuresSet
+  );
 
   const filteredProducts = productsWithScore.filter(
     (product) => product.score > 0
