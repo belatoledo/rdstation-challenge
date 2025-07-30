@@ -38,7 +38,6 @@ function Form({ onRecommendationsUpdate }) {
 
     try {
       const dataRecommendations = getRecommendations(formData);
-      console.log("recomendações geradas:", dataRecommendations);
       return onRecommendationsUpdate(dataRecommendations);
     } catch (error) {
       console.error("erro nas recomendações:", error);
