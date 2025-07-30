@@ -2,7 +2,7 @@
 
 import React from "react";
 
-function RecommendationCard({ recommendation }) {
+const RecommendationCard = ({ recommendation }) => {
   const { name, category, score } = recommendation;
 
   const productLinks = {
@@ -43,6 +43,6 @@ function RecommendationCard({ recommendation }) {
       )}
     </li>
   );
-}
+};
 
 export default RecommendationCard;

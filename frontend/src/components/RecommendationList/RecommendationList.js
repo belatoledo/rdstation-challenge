@@ -9,7 +9,7 @@ function RecommendationList({ recommendations }) {
       </h2>
 
       {recommendations.length > 0 && (
-        <p className="my-4 p-2 text-cyan-800 font-medium bg-cyan-100 rounded-lg">
+        <p className="mt-2 p-2 text-cyan-800 font-medium bg-cyan-100 rounded-lg">
           🎯 {recommendations.length} produto(s) recomendado(s)
         </p>
       )}
