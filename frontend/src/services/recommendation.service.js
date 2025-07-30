@@ -46,14 +46,10 @@ const getRecommendations = (formData = {}, products = []) => {
   });
 
   if (selectedRecommendationType === "SingleProduct") {
-    const topScoreProduct = sortedProducts[0];
-    const { score, ...cleanProduct } = topScoreProduct;
-    return [cleanProduct];
+    return sortedProducts.length > 0 ? [sortedProducts[0]] : [];
   }
 
-  const cleanProducts = sortedProducts.map(({ score, ...product }) => product);
-
-  return cleanProducts;
+  return sortedProducts;
 };
 
-export default { getRecommendations };
+export default getRecommendations;

@@ -1,5 +1,5 @@
 import React from "react";
-import RecommendationCard from "./Card/ReccomendationCard";
+import RecommendationCard from "./Card/RecommendationCard";
 
 function RecommendationList({ recommendations }) {
   return (
@@ -17,8 +17,7 @@ function RecommendationList({ recommendations }) {
         {recommendations.map((recommendation) => (
           <RecommendationCard
             key={recommendation.id}
-            name={recommendation.name}
-            category={recommendation.category}
+            recommendation={recommendation}
           />
         ))}
       </ul>
