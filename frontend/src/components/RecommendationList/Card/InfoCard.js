@@ -1,4 +1,4 @@
-function InfoCard() {
+const InfoCard = () => {
   return (
     <div className="mt-4 p-8 bg-green-100 border-l-4 border-green-500 rounded-xl">
       <h4 className="mb-4 text-lg text-green-800 font-semibold">
@@ -26,6 +26,6 @@ function InfoCard() {
       </div>
     </div>
   );
-}
+};
 
 export default InfoCard;
