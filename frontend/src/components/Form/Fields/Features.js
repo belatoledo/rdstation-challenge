@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import Checkbox from '../../shared/Checkbox';
+import React, { useState } from "react";
+import Checkbox from "../../shared/Checkbox";
 
 function Features({ features, selectedFeatures = [], onFeatureChange }) {
-  const [currentFeatures, setCurrentFeatures] = useState(selectedFeatures)
+  const [currentFeatures, setCurrentFeatures] = useState(selectedFeatures);
 
   const handleFeatureChange = (feature) => {
     const updatedFeatures = currentFeatures.includes(feature)
@@ -14,11 +14,11 @@ function Features({ features, selectedFeatures = [], onFeatureChange }) {
   };
 
   return (
-    <div className="mb-4">
-      <h2 className="text-lg font-bold mb-2">Funcionalidades:</h2>
+    <div className="mb-6">
+      <h2 className="text-lg text-gray-800 font-bold mb-4">Funcionalidades:</h2>
       <ul>
         {features.map((feature, index) => (
-          <li key={index} className="mb-2">
+          <li key={index} className="text-base font-light mb-4">
             <Checkbox
               value={feature}
               checked={currentFeatures.includes(feature)}
