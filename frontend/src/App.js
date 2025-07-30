@@ -10,13 +10,15 @@ function App() {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen flex flex-col justify-center items-center">
-      <h1 className="text-3xl font-bold mb-8">
-        Recomendador de Produtos RD Station
-      </h1>
-      <div className="bg-white p-8 rounded-lg shadow-md w-full md:w-3/4 lg:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="col-span-2 mb-4">
-          <p className="text-lg">
+    <div className="bg-gray-50 min-h-screen flex flex-col justify-center items-center">
+      <div className="p-16 w-full md:w-3/4 lg:w-1/2 bg-gradient-to-r from-purple-200 to-cyan-300 rounded-t-lg">
+        <h1 className="text-3xl text-center font-bold">
+          Recomendador de Produtos RD Station
+        </h1>
+      </div>
+      <div className="bg-white p-8 rounded-b-lg shadow-md w-full md:w-3/4 lg:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="col-span-2 p-4 bg-cyan-50 text-cyan-900 rounded-lg">
+          <p className="text-xs text-justify">
             Bem-vindo ao Recomendador de Produtos RD Station. Aqui você pode
             encontrar uma variedade de produtos da RD Station, cada um projetado
             para atender às necessidades específicas do seu negócio. De CRM a
