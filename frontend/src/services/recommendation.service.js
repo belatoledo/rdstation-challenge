@@ -30,6 +30,21 @@ function findTopProduct(productsWithScore) {
   return topScoreProduct;
 }
 
+function filterAndSortProducts(productsWithScore) {
+  const filteredProducts = productsWithScore.filter((p) => p.score > 0);
+  if (filteredProducts.length === 0) {
+    return [];
+  }
+
+  const sortedProducts = filteredProducts.sort((a, b) => {
+    if (b.score !== a.score) {
+      return b.score - a.score;
+    }
+    return b.id - a.id;
+  });
+  return sortedProducts;
+}
+
 const getRecommendations = (formData = {}, products = []) => {
   const {
     selectedPreferences = [],
@@ -54,28 +69,13 @@ const getRecommendations = (formData = {}, products = []) => {
     featuresSet
   );
 
-  const filteredProducts = productsWithScore.filter(
-    (product) => product.score > 0
-  );
-
-  if (filteredProducts.length === 0) {
-    return [];
-  }
-
-  const sortedProducts = filteredProducts.sort((a, b) => {
-    if (b.score !== a.score) {
-      return b.score - a.score;
-    }
-    return b.id - a.id;
-  });
-
   if (selectedRecommendationType === "SingleProduct") {
     const topProduct = findTopProduct(productsWithScore);
     if (!topProduct) return [];
     return [topProduct];
   }
 
-  return sortedProducts;
+  return filterAndSortProducts(productsWithScore);
 };
 
 export default getRecommendations;
