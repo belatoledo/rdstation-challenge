@@ -1,10 +1,12 @@
 import React from "react";
-import RecommendationCard from "./Card/RecommendationCard";
+import { RecommendationCard, InfoCard } from "./Card";
 
 function RecommendationList({ recommendations }) {
   return (
-    <div className="w-full h-full mx-auto p-6 bg-purple-50 border-2 border-purple-200 rounded-lg">
-      <h2 className="text-lg font-bold mb-4">Lista de Recomendações:</h2>
+    <div className="w-full h-full flex flex-col mx-auto p-6 bg-purple-50 border-2 border-purple-200 rounded-lg">
+      <h2 className="text-lg text-gray-800 font-bold mb-4">
+        Lista de Recomendações:
+      </h2>
 
       {recommendations.length > 0 && (
         <p className="my-4 p-2 text-cyan-800 font-medium bg-cyan-100 rounded-lg">
@@ -17,15 +19,17 @@ function RecommendationList({ recommendations }) {
           <strong>"Obter recomendação"</strong> para ver os resultados! ✨
         </p>
       )}
-
-      <ul className="space-y-4 mt-6">
-        {recommendations.map((recommendation) => (
-          <RecommendationCard
-            key={recommendation.id}
-            recommendation={recommendation}
-          />
-        ))}
-      </ul>
+      <div className="flex flex-col justify-between flex-grow">
+        <ul className="space-y-4 mt-6">
+          {recommendations.map((recommendation) => (
+            <RecommendationCard
+              key={recommendation.id}
+              recommendation={recommendation}
+            />
+          ))}
+        </ul>
+        <InfoCard />
+      </div>
     </div>
   );
 }
