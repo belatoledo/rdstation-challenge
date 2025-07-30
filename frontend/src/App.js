@@ -6,7 +6,7 @@ function App() {
   const [recommendations, setRecommendations] = useState([]);
 
   const handleRecommendationsUpdate = (newRecommendations) => {
-    setRecommendations(newRecommendations);
+    setRecommendations(newRecommendations || []);
   };
 
   return (
