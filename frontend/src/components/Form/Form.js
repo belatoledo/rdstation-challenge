@@ -47,7 +47,7 @@ function Form({ onRecommendationsUpdate }) {
 
   return (
     <form
-      className="max-w-md mx-auto p-6 bg-gray-50 border-2 border-gray-200 rounded-lg shadow-md"
+      className="w-full mx-auto p-6 bg-gray-50 border-2 border-gray-200 rounded-lg shadow-md"
       onSubmit={handleSubmit}
     >
       <Preferences
